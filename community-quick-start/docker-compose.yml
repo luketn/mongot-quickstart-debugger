@@ -55,6 +55,11 @@ services:
   mongot-local:
     image: mongot-community-local:latest
     container_name: mongot-community
+    command:
+      - /mongot-community/mongot
+      - --jvm-flags
+      - "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+      - --config=/mongot-community/config.default.yml
     profiles:
       - local
     networks:
@@ -71,6 +76,7 @@ services:
     ports:
       - 27028:27028  # Query server port from config
       - 9946:9946    # Metrics port from config
+      - 127.0.0.1:5005:5005  # JVM debugger port
 volumes:
   mongod_data:
   mongot_data:

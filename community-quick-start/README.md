@@ -43,6 +43,11 @@ The script will automatically:
 - Create a Docker image with your local build
 - Start both `mongod` and `mongot` containers
 
+Local mode also enables JVM debugger attachment for the locally built `mongot` on
+`localhost:5005`. In your IDE, create a remote JVM debug configuration with host
+`localhost` and port `5005`. The debugger port is bound to `127.0.0.1` only;
+do not expose it on a shared network.
+
 ### Latest Mode
 Uses the pre-built `mongot` image from Docker Hub. This is faster and doesn't require building from source.
 
